@@ -2,31 +2,6 @@
 - Implemented robust APIs using Express.js and Node.js, enabling smooth data retrieval and manipulation.
 - Ensured secure access to sensitive features by implementing user authentication and authorization mechanisms in this application.
 
-# About our Project
-
-
-<div align="left">
-   <br>
-   <img src="https://img.shields.io/github/repo-size/grraghav120/expense-tracker?style=for-the-badge" />
-   <img src="https://img.shields.io/github/issues/grraghav120/expense-tracker?style=for-the-badge" />
-   <img src="https://img.shields.io/github/issues-closed-raw/grraghav120/expense-tracker?style=for-the-badge" />
-    <img src="https://img.shields.io/github/license/grraghav120/expense-tracker?style=for-the-badge" />
-
-   <img src="https://img.shields.io/github/issues-pr/grraghav120/expense-tracker?style=for-the-badge" />
-    <img src="https://img.shields.io/github/contributors/grraghav120/expense-tracker?style=for-the-badge" />
-    <img src="https://img.shields.io/github/stars/grraghav120/expense-tracker?style=for-the-badge" />
-
-   <img src="https://img.shields.io/github/issues-pr-closed-raw/grraghav120/expense-tracker?style=for-the-badge" />
-   <img src="https://img.shields.io/github/forks/grraghav120/expense-tracker?style=for-the-badge" />
-  <img src="https://img.shields.io/github/last-commit/grraghav120/expense-tracker?style=for-the-badge" />
-</div>  
-
-# Quick Acces 😏
-
-- Email 📧 - abc@gmail.com
-- password 🔑 - 12345678 🤫🤐
-
-
 # How to Use 👥 (Features of Application)
 - Make an Account (SignUp) for first Time.
 - If Already have an account please Login
@@ -40,6 +15,9 @@
 - Logout (Auto Logout in next 1 hour so don't worry 😊 )
 - You can check Expense Summary using BAR chart and PIE charts.
 - You can also Import Expense in CSV files.📩
+
+
+
 ## Screenshots
 # Dashboard - View Expense
 
@@ -115,3 +93,78 @@ Update info
 - Run `ng serve`
 - Navigate to  `http://localhost:4200/`.
 - The application will automatically reload if you change any of the source files.
+
+# flowchart
+```mermaid
+
+flowchart TD
+    Start([Start]) --> Auth{Authentication}
+    Auth -->|New User| SignUp[Sign Up]
+    Auth -->|Existing User| Login[Login]
+    
+    SignUp -->|Create Account| Dashboard
+    Login -->|Validate Credentials| Dashboard
+    
+    Dashboard --> NavOptions{Navigation Options}
+    
+    NavOptions -->|Add Expense| AddExpense[Add New Expense]
+    NavOptions -->|View Expenses| ViewExpense[View Expenses]
+    NavOptions -->|Expense Summary| ExpenseSummary[Expense Summary]
+    NavOptions -->|User Profile| Profile[User Profile]
+    NavOptions -->|Logout| Logout[Logout]
+    
+    AddExpense --> CategoryExists{Category Exists?}
+    CategoryExists -->|Yes| FillExpenseDetails[Fill Expense Details]
+    CategoryExists -->|No| AddCategory[Add New Category]
+    AddCategory --> FillExpenseDetails
+    FillExpenseDetails --> SaveExpense[Save Expense]
+    SaveExpense --> Dashboard
+    
+    ViewExpense --> ExpenseActions{Actions}
+    ExpenseActions -->|Edit| EditExpense[Edit Expense]
+    ExpenseActions -->|Delete| DeleteExpense[Delete Expense]
+    ExpenseActions -->|View Details| ExpenseDetails[View Expense Details]
+    EditExpense --> SaveExpense
+    DeleteExpense --> Dashboard
+    ExpenseDetails --> Dashboard
+    
+    ExpenseSummary --> ChartOptions{Chart Options}
+    ChartOptions -->|Bar Chart| BarChart[Bar Chart View]
+    ChartOptions -->|Pie Chart| PieChart[Pie Chart View]
+    ChartOptions -->|Import CSV| ImportCSV[Import Expenses from CSV]
+    BarChart --> Dashboard
+    PieChart --> Dashboard
+    ImportCSV --> Dashboard
+    
+    Profile --> ProfileOptions{Profile Options}
+    ProfileOptions -->|View Info| ViewProfile[View Profile Info]
+    ProfileOptions -->|Edit Info| EditProfile[Edit Profile]
+    EditProfile --> SaveProfile[Save Profile Changes]
+    ViewProfile --> Dashboard
+    SaveProfile --> Dashboard
+    
+    Logout --> AutoLogout[Auto Logout after 1 hour]
+    AutoLogout --> Start
+    Logout --> Start
+    
+    %% Styling
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:1px
+    classDef start fill:#6c5ce7,color:white,stroke:#333,stroke-width:1px
+    classDef auth fill:#fdcb6e,stroke:#333,stroke-width:1px
+    classDef dashboard fill:#00cec9,color:white,stroke:#333,stroke-width:1px
+    classDef action fill:#74b9ff,stroke:#333,stroke-width:1px
+    classDef expense fill:#55efc4,stroke:#333,stroke-width:1px
+    classDef profile fill:#ff7675,color:white,stroke:#333,stroke-width:1px
+    classDef logout fill:#d63031,color:white,stroke:#333,stroke-width:1px
+    classDef decision fill:#e17055,color:white,stroke:#333,stroke-width:1px
+    classDef summary fill:#a29bfe,color:white,stroke:#333,stroke-width:1px
+    
+    class Start start
+    class Auth,CategoryExists,ExpenseActions,ChartOptions,ProfileOptions decision
+    class Dashboard,NavOptions dashboard
+    class SignUp,Login auth
+    class AddExpense,FillExpenseDetails,SaveExpense,EditExpense,DeleteExpense,ExpenseDetails,ViewExpense expense
+    class AddCategory action
+    class BarChart,PieChart,ImportCSV,ExpenseSummary summary
+    class Profile,ViewProfile,EditProfile,SaveProfile profile
+    class Logout,AutoLogout logout
